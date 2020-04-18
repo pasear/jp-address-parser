@@ -5,7 +5,7 @@ A simple parser for Japanese address.
 ## Install
 
 ```bash
-npm i @pasear/jp-address-parser
+npm i jp-address-parser
 ```
 
 ## Usage

@@ -1,5 +1,5 @@
 {
-  "name": "@pasear/jp-address-parser",
+  "name": "jp-address-parser",
   "version": "1.0.0",
   "description": "Japan Address Parser",
   "main": "index.js",
