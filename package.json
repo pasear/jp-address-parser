@@ -1,5 +1,5 @@
 {
-  "name": "jp-address-parser",
+  "name": "@pasear/jp-address-parser",
   "version": "1.0.0",
   "description": "Japan Address Parser",
   "main": "index.js",
@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/pasear/jp-address-parser#readme",
   "dependencies": {
-    "he": "^1.2.0"
   },
   "devDependencies": {
     "mocha": "^7.1.1"
+  },
+  "directories": {
+    "test": "test"
   }
 }
