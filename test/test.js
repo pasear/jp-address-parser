@@ -135,6 +135,42 @@ describe('Address Parsing', function () {
                 left: ''
             }
         },
+        {
+            text: '板橋区大谷口北町',
+            result: {
+                prefecture: undefined,
+                municipality: '板橋区',
+                location: '大谷口北町',
+                chome: undefined,
+                ban: undefined,
+                go: undefined,
+                left: ''
+            }
+        },
+        {
+            text: '板橋区',
+            result: {
+                prefecture: undefined,
+                municipality: '板橋区',
+                location: undefined,
+                chome: undefined,
+                ban: undefined,
+                go: undefined,
+                left: ''
+            }
+        },
+        {
+            text: '大阪府',
+            result: {
+                prefecture: '大阪府',
+                municipality: undefined,
+                location: undefined,
+                chome: undefined,
+                ban: undefined,
+                go: undefined,
+                left: ''
+            }
+        },
     ];
     tests.forEach((t) => it(t.text, function () {
         const result = jp_address_parser.parse(t.text);

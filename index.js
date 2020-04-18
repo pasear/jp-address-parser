@@ -60,7 +60,7 @@ function parse(address_text, options = {}) {
                 }
             }
         } else {
-            location = text;
+            location = text ? text : undefined;
             text = '';
         }
     }
