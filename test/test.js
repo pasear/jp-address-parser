@@ -123,6 +123,18 @@ describe('Address Parsing', function () {
                 left: '他(要相談）'
             }
         },
+        {
+            text: '東京都板橋区大谷口北町',
+            result: {
+                prefecture: '東京都',
+                municipality: '板橋区',
+                location: '大谷口北町',
+                chome: undefined,
+                ban: undefined,
+                go: undefined,
+                left: ''
+            }
+        },
     ];
     tests.forEach((t) => it(t.text, function () {
         const result = jp_address_parser.parse(t.text);

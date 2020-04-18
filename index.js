@@ -59,6 +59,9 @@ function parse(address_text, options = {}) {
                     text = m[7].trim();
                 }
             }
+        } else {
+            location = text;
+            text = '';
         }
     }
     
