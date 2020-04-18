@@ -1,0 +1,25 @@
+{
+  "name": "jp-address-parser",
+  "version": "1.0.0",
+  "description": "Japan Address Parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pasear/jp-address-parser.git"
+  },
+  "author": "Chunhao Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pasear/jp-address-parser/issues"
+  },
+  "homepage": "https://github.com/pasear/jp-address-parser#readme",
+  "dependencies": {
+    "he": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.1"
+  }
+}
