@@ -1,6 +1,6 @@
 {
   "name": "jp-address-parser",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Japan Address Parser",
   "main": "index.js",
   "scripts": {
