@@ -40,7 +40,7 @@ async function _parse_node(text, cache, key, get_list) {
     if (m) {
         return [m[1], m[m.length - 1]];
     }
-    return [];
+    return [, text];
 }
 
 async function parse(address_text, options = {}) {
@@ -48,17 +48,26 @@ async function parse(address_text, options = {}) {
     let chome;
     let ban;
     let go;
+    let tmp;
 
     let text = address_text.replace(/\s|　/, '');
-    if (text.length > 0 && !prefecture) {
-        [prefecture, text] = await _parse_node(text, regex_cache, 'pref', async () => get_prefectures());
+    if (text.length > 0) {
+        [tmp, text] = await _parse_node(text, regex_cache, 'pref', async () => get_prefectures());
+        if (!tmp) {
+            const p1 = async () => (await get_prefectures()).map((p) => p.substring(0, p.length - 1));
+            [tmp, text] = await _parse_node(text, regex_cache, 'pref1', p1);
+            if (tmp) tmp = (await get_prefectures()).filter((p) => p.substring(0, p.length - 1) === tmp)[0];
+        }
+        if (tmp) prefecture = tmp;
     }
-    if (text && text.length > 0 && !city) {
-        [city, text] = await _parse_node(text, regex_cache.city, prefecture, async () => get_cities(prefecture));
+    if (text && text.length > 0) {
+        [tmp, text] = await _parse_node(text, regex_cache.city, prefecture, async () => get_cities(prefecture));
+        if (tmp) city = tmp;
     }
-    if (text && text.length > 0 && !town) {
+    if (text && text.length > 0) {
         const key = `${prefecture}/${city}`;
-        [town, text] = await _parse_node(text, regex_cache.town, key, async () => get_towns(prefecture, city));
+        [tmp, text] = await _parse_node(text, regex_cache.town, key, async () => get_towns(prefecture, city));
+        if (tmp) town = tmp;
     }
     if (text && text.length > 0) {
         const m = RegExp(`^(${digit_regex}+)(丁目|${delimit})?(.*)$`).exec(text);

@@ -175,10 +175,25 @@ describe('Address Parsing', function () {
                 ban: undefined,
                 go: undefined,
                 left: ''
+            },
+            options: {
+                prefecture: '東京都'
             }
         },
         {
             text: '東京都北区東十条6丁目',
+            result: {
+                prefecture: '東京都',
+                city: '北区',
+                town: '東十条',
+                chome: 6,
+                ban: undefined,
+                go: undefined,
+                left: ''
+            }
+        },
+        {
+            text: '東京北区東十条6丁目',
             result: {
                 prefecture: '東京都',
                 city: '北区',
