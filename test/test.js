@@ -1,7 +1,7 @@
-const jp_address_parser = require('../');
+const japa = require('../');
 const assert = require('assert').strict;
 
-describe('Address Parsing', function () {
+describe('Parsing', function () {
     const tests = [
         {
             text: '東京都調布市入間町2-29番21号',
@@ -204,9 +204,46 @@ describe('Address Parsing', function () {
                 left: ''
             }
         },
+        {
+            text: '東京北区東十条6丁目二 十八番七〇',
+            result: {
+                prefecture: '東京都',
+                city: '北区',
+                town: '東十条',
+                chome: 6,
+                ban: 28,
+                go: 70,
+                left: ''
+            }
+        },
     ];
     tests.forEach((t) => it(t.text, async function () {
-        const result = await jp_address_parser.parse(t.text, t.options);
+        const result = await japa.parse(t.text, t.options);
         assert.deepEqual(result, t.result);
+    }));
+});
+
+describe('Normalization', function () {
+    const tests = [
+        {
+            text: '東京北区東十条6丁目',
+            result: '東京都北区東十条六丁目'
+        },
+        {
+            text: '東京都調布市入間町2丁目-29番21号',
+            result: '東京都調布市入間町二丁目２９番２１号'
+        },
+        {
+            text: '東京都調布市入間町十 三丁目二十八番七〇',
+            result: '東京都調布市入間町十三丁目２８番７０号'
+        },
+        {
+            text: '京都府京都市東山区本町22-489-1',
+            result: '京都府京都市東山区本町二十二丁目４８９番１号'
+        }
+    ];
+    tests.forEach((t) => it(t.text, async function () {
+        const result = await japa.normalize(t.text, t.options);
+        assert.strictEqual(result, t.result);
     }));
 });
