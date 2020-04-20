@@ -217,7 +217,7 @@ describe('Parsing', function () {
             }
         },
     ];
-    tests.forEach((t) => it(t.text, async function () {
+    tests.forEach((t) => it(t.text + (t.options ? ` ${JSON.stringify(t.options)}`: ''), async function () {
         const result = await japa.parse(t.text, t.options);
         assert.deepEqual(result, t.result);
     }));
@@ -245,9 +245,19 @@ describe('Normalization', function () {
         {
             text: '京都府京都市東山区本町22-489-1',
             result: '京都府京都市東山区本町二十二丁目４８９番１号'
+        },
+        {
+            text: '京都府京都市東山区本町22-489-1',
+            result: '京都府京都市東山区本町２２丁目４８９−１',
+            options: { number_scheme: 'chome_full_width' }
+        },
+        {
+            text: '東京都千代田区東神田3-1-9',
+            result: '東京都千代田区東神田3丁目1-9',
+            options: { number_scheme: 'chome_numeric' }
         }
     ];
-    tests.forEach((t) => it(t.text, async function () {
+    tests.forEach((t) => it(t.text + (t.options ? ` ${JSON.stringify(t.options)}`: ''), async function () {
         const result = await japa.normalize(t.text, t.options);
         assert.strictEqual(result, t.result);
     }));

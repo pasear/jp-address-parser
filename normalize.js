@@ -31,7 +31,21 @@ const convert = {
     },
     numeric (chome, ban, go) {
         return [[chome, ban, go].filter((t) => Number.isInteger(t)).join('-')];
-    }
+    },
+    chome_full_width (chome, ban, go) {
+        const items = [];
+        if (Number.isInteger(chome)) items.push(`${full_width_num(chome)}丁目`);
+        const p = [ban, go].filter((t) => Number.isInteger(t)).map((t) => full_width_num(t)).join('−');
+        if (p) items.push(p);
+        return items;
+    },
+    chome_numeric (chome, ban, go) {
+        const items = [];
+        if (Number.isInteger(chome)) items.push(`${chome}丁目`);
+        const p = [ban, go].filter((t) => Number.isInteger(t)).join('-');
+        if (p) items.push(p);
+        return items;
+    },
 };
 
 async function normalize(address_text, options = {}) {

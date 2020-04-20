@@ -65,7 +65,7 @@ Parsed result is an object containing the following properties.
 - city: such as 千代田区 or 塩谷郡高根沢町. The data obtained from HeartRails Geo API supports only three layers segementation.
 - town: such as 東十条
 - chome, ban, go: the 丁目-番-号 part of address. Note that the parsed numbers can be different from what it actually means. Also, 番 and 番地 are not distinguished here for simplicity.
-- left
+- left: what's left
 
 #### normalize
 
@@ -79,6 +79,8 @@ Normalize address text so that two addresses can be compared.
   - `number_scheme`:
     - `classic`: 東京都調布市入間町十三丁目２８番７０号 (default)
     - `numeric`: 東京都調布市入間町13-28-70
+    - `chome_full_width`: 京都府京都市東山区本町２２丁目４８９−１
+    - `chome_numeric`: 東京都千代田区東神田3丁目1-9
 
 #### load_data
 
