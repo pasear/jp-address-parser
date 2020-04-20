@@ -37,6 +37,10 @@ const numbers = { '０': 0, '１': 1, '２': 2, '３': 3, '４': 4, '５': 5, '�
 const digit_regex = `[0123456789${Object.keys(numbers).join('')}]`;
 const chome_regex = RegExp(`^(.*?)${digit_regex}+丁目$`);
 
+function extract(s) {
+    return String(s).replace('ヶ', 'ケ').replace(/\s|　/, '');
+}
+
 /**
  * load_data(prefecture, null, { recursive: true }): load all city, town info in the prefecture, only when the data is not existing;
  * load_data(prefecture): load city info in the prefecture;
@@ -52,7 +56,7 @@ async function load_data(prefecture, city, { skip_existing = true, recursive = f
         if (verbose) console.log(`[load_data] ${url}`);
         const { location } = (await axios(encodeURI(url, axios_config))).data.response;
         location.forEach((loc) => {
-            town_map[prefecture][loc.city] = null;
+            town_map[prefecture][extract(loc.city)] = null;
         });
         updated = true;
     }
@@ -69,7 +73,8 @@ async function load_data(prefecture, city, { skip_existing = true, recursive = f
                 .data.response;
             town_map[prefecture][cname] = {};
             location.forEach((obj) => {
-                const { town } = obj;
+                const { town: _town } = obj;
+                const town = extract(_town);
                 const m = chome_regex.exec(town);
                 if (m) town_map[prefecture][cname][m[1]] = 1;
                 else town_map[prefecture][cname][town] = 2;

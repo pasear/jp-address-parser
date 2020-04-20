@@ -247,6 +247,14 @@ describe('Normalization', function () {
             result: '京都府京都市東山区本町二十二丁目４８９番１号'
         },
         {
+            text: '東京都北区西ケ原4丁目',
+            result: '東京都北区西ケ原四丁目'
+        },
+        {
+            text: '東京都北区西ヶ原4丁目',
+            result: '東京都北区西ケ原四丁目'
+        },
+        {
             text: '京都府京都市東山区本町22-489-1',
             result: '京都府京都市東山区本町２２丁目４８９−１',
             options: { number_scheme: 'chome_full_width' }
