@@ -18,7 +18,7 @@ npm i jp-address-parser
 ```javascript
 const japa = require('jp-address-parser');
 
-japa.parse('東京都北区東十条6丁目二 十八番七〇')
+japa.parse('東京北区東十条6丁目二 十八番七〇')
     .then(console.log);
 /*
 { prefecture: '東京都',
