@@ -46,6 +46,13 @@ const convert = {
         if (p) items.push(p);
         return items;
     },
+    chome_ban_numeric (chome, ban, go) {
+        const items = [];
+        if (Number.isInteger(chome)) items.push(`${chome}丁目`);
+        if (Number.isInteger(ban)) items.push(`${ban}番`);
+        if (Number.isInteger(go)) items.push(`${go}`);
+        return items;
+    },
 };
 
 async function normalize(address_text, options = {}) {

@@ -255,6 +255,11 @@ describe('Normalization', function () {
             text: '東京都千代田区東神田3-1-9',
             result: '東京都千代田区東神田3丁目1-9',
             options: { number_scheme: 'chome_numeric' }
+        },
+        {
+            text: '東京都国分寺市高木町1丁目6番32',
+            result: '東京都国分寺市高木町1丁目6番32',
+            options: { number_scheme: 'chome_ban_numeric' }
         }
     ];
     tests.forEach((t) => it(t.text + (t.options ? ` ${JSON.stringify(t.options)}`: ''), async function () {

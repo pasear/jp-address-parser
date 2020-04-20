@@ -81,6 +81,7 @@ Normalize address text so that two addresses can be compared.
     - `numeric`: 東京都調布市入間町13-28-70
     - `chome_full_width`: 京都府京都市東山区本町２２丁目４８９−１
     - `chome_numeric`: 東京都千代田区東神田3丁目1-9
+    - `chome_ban_numeric`: 東京都国分寺市高木町1丁目6番32
 
 #### load_data
 
