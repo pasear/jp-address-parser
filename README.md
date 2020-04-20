@@ -62,7 +62,7 @@ parse (address_text, options)
 #### load_data
 
 ```javascript
-load_data(prefecture, city, { skip_existing = true, recursive = false } = {})
+load_data(prefecture, city, { skip_existing = true, recursive = false, verbose = false } = {})
 ```
 
 This function allows downloading the city data to `data_path` before parsing.
