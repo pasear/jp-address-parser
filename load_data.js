@@ -38,18 +38,19 @@ const digit_regex = `[0123456789${Object.keys(numbers).join('')}]`;
 const chome_regex = RegExp(`^(.*?)${digit_regex}+丁目$`);
 
 /**
- * load_data(prefecture, { recursive: true }): load all city, town info in the prefecture, only when the data is not existing;
+ * load_data(prefecture, null, { recursive: true }): load all city, town info in the prefecture, only when the data is not existing;
  * load_data(prefecture): load city info in the prefecture;
  * load_data(prefecture, city): load the town info in the (prefecture, city)
  */
-async function load_data(prefecture, city, { skip_existing = true, recursive = false } = {}) {
+async function load_data(prefecture, city, { skip_existing = true, recursive = false, verbose = false } = {}) {
     const town_map = await get_town_map();
     let updated = false;
     assert.strictEqual(prefecture in town_map, true);
     if (!town_map[prefecture]) {
         town_map[prefecture] = {};
-        const { location } = (await axios(encodeURI(`http://geoapi.heartrails.com/api/json?method=getCities&prefecture=${prefecture}`, axios_config)))
-            .data.response;
+        const url = `http://geoapi.heartrails.com/api/json?method=getCities&prefecture=${prefecture}`;
+        if (verbose) console.log(`[load_data] ${url}`);
+        const { location } = (await axios(encodeURI(url, axios_config))).data.response;
         location.forEach((loc) => {
             town_map[prefecture][loc.city] = null;
         });
@@ -62,7 +63,9 @@ async function load_data(prefecture, city, { skip_existing = true, recursive = f
     }
     for (const cname of cities) {
         if (!town_map[prefecture][cname] || !skip_existing) {
-            const { location } = (await axios(encodeURI(`http://geoapi.heartrails.com/api/json?method=getTowns&prefecture=${prefecture}&city=${cname}`)))
+            const url = `http://geoapi.heartrails.com/api/json?method=getTowns&prefecture=${prefecture}&city=${cname}`;
+            if (verbose) console.log(`[load_data] ${url}`);
+            const { location } = (await axios(encodeURI(url)))
                 .data.response;
             town_map[prefecture][cname] = {};
             location.forEach((obj) => {
