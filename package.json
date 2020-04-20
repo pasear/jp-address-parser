@@ -16,6 +16,7 @@
     "url": "https://github.com/pasear/jp-address-parser/issues"
   },
   "homepage": "https://github.com/pasear/jp-address-parser#readme",
+  "keywords": ["geocoding", "address-parser", "japanese"],
   "devDependencies": {
     "mocha": "^7.1.1"
   },

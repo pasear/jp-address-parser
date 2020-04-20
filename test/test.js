@@ -238,6 +238,11 @@ describe('Normalization', function () {
             result: '東京都調布市入間町十三丁目２８番７０号'
         },
         {
+            text: '東京都調布市入間町十 三丁目二十八番七〇',
+            result: '東京都調布市入間町13-28-70',
+            options: { number_scheme: 'numeric' }
+        },
+        {
             text: '京都府京都市東山区本町22-489-1',
             result: '京都府京都市東山区本町二十二丁目４８９番１号'
         }

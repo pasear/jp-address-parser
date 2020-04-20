@@ -73,7 +73,12 @@ Parsed result is an object containing the following properties.
 async function normalize(address_text, options)
 ```
 
-- options: passed to `parse` function
+Normalize address text so that two addresses can be compared.
+
+- `options`: also passed to `parse` function
+  - `number_scheme`:
+    - `classic`: 東京都調布市入間町十三丁目２８番７０号 (default)
+    - `numeric`: 東京都調布市入間町13-28-70
 
 #### load_data
 

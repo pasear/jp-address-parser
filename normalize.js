@@ -21,12 +21,23 @@ function full_width_num(num) {
     return String(num).split('').reduce((acc, curr) => acc + digits[parseInt(curr)], '');
 }
 
-async function normalize(address_text, options) {
+const convert = {
+    classic (chome, ban, go) {
+        const items = [];
+        if (Number.isInteger(chome)) items.push(`${jp_num(chome)}丁目`);
+        if (Number.isInteger(ban)) items.push(`${full_width_num(ban)}番`);
+        if (Number.isInteger(go)) items.push(`${full_width_num(go)}号`);
+        return items;
+    },
+    numeric (chome, ban, go) {
+        return [[chome, ban, go].filter((t) => Number.isInteger(t)).join('-')];
+    }
+};
+
+async function normalize(address_text, options = {}) {
     const { prefecture, city, town, chome, ban, go } = await parse(address_text, options);
-    const items = [prefecture, city, town]
-    if (Number.isInteger(chome)) items.push(`${jp_num(chome)}丁目`);
-    if (Number.isInteger(ban)) items.push(`${full_width_num(ban)}番`);
-    if (Number.isInteger(go)) items.push(`${full_width_num(go)}号`);
+    const { number_scheme = 'classic' } = options;
+    const items = [prefecture, city, town, ...convert[number_scheme](chome, ban, go)];
     return items.filter((t) => !!t).join('');
 }
 
