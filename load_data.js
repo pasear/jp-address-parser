@@ -38,7 +38,7 @@ const digit_regex = `[0123456789${Object.keys(numbers).join('')}]`;
 const chome_regex = RegExp(`^(.*?)${digit_regex}+丁目$`);
 
 function extract(s) {
-    return String(s).replace(/\s|　/, '').replace('ヶ', 'ケ').replace('ノ', '之');
+    return String(s).replace(/\s|　/g, '').replace(/ヶ/g, 'ケ').replace(/ノ/g, '之');
 }
 
 /**

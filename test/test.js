@@ -251,7 +251,7 @@ describe('Normalization', function () {
             result: '東京都北区西ケ原四丁目'
         },
         {
-            text: '東京都北区西ヶ原4丁目',
+            text: '東京都 北区 西ヶ 原4丁目',
             result: '東京都北区西ケ原四丁目'
         },
         {

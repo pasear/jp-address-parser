@@ -51,9 +51,9 @@ async function parse(address_text, options = {}) {
     let tmp;
 
     let text = address_text
-        .replace(/\s|　/, '')
-        .replace('ヶ', 'ケ')
-        .replace('ノ', '之');
+        .replace(/\s|　/g, '')
+        .replace(/ヶ/g, 'ケ')
+        .replace(/ノ/g, '之');
     if (text.length > 0) {
         [tmp, text] = await _parse_node(text, regex_cache, 'pref', async () => get_prefectures());
         if (!tmp) {
